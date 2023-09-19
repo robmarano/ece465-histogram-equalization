@@ -36,7 +36,7 @@ public class HistogramEqualizeUniProc {
 
         int[] histogram = new int[256];
 
-        // Convert the image form RGB to YCbCr
+        // Convert the image form RGB to YCbCr and calculate histogram[]
         Utils.RGB_to_YBR(img, histogram);
 
         long time_1 = System.currentTimeMillis();
