@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class HistogramEqualizeMultiProc {
 
     static int resize_scale = 8;
-    static String file_name = "webb"; //"space"; //"milk"; //"mayor"; //"dark";
+    static String file_name = "Sample-jpg-image-30mb"; //"dark"; //"webb"; //"space"; //"milk"; //"mayor"; //"dark";
     BufferedImage img = null;
     String pwd = System.getenv("PWD");
 
@@ -66,7 +66,7 @@ public class HistogramEqualizeMultiProc {
         System.out.println("Start threaded processing");
         long startTime = System.currentTimeMillis();
 
-        int total_threads = Runtime.getRuntime().availableProcessors();
+        int total_threads = Runtime.getRuntime().availableProcessors()/4;
         System.out.println("CPU Threads available = " + total_threads);
 
         // First pool: convert the image from RGB to YCbCr, with a ThreadPool with fixed size of total_thread.
@@ -132,6 +132,7 @@ public class HistogramEqualizeMultiProc {
 
         // Find the closest number to total_thread that is multiple of 256
         histogram_threads = Utils.find_closest_int(256, total_threads);
+        System.out.printf("histogram_threads = %d\n", histogram_threads);
 
         futures.clear();
 
